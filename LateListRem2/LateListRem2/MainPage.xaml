@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LateListRem2"
+             x:Class="LateListRem2.MainPage">
+
+	<Label Text="Welcome to Xamarin Forms!" 
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+
+    <StackLayout>
+        <SearchBar Placeholder="Search..." TextChanged="SearchBar_TextChanged" />
+        <ListView x:Name="mLisView" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="mLisView_Refreshing">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="30,10,30,0">
+                        <StackLayout HorizontalOptions="StartAndExpand">
+                            <Label Text="{Binding CustomerName}" TextColor="Gray"/>
+                                <Label Text="{Binding TransactionDate, StringFormat='{0:yyyy MMM dd}'}" TextColor="DarkGray"/>
+                        </StackLayout>
+                        <Button Text="Send Reminder" />
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            
+        </ListView.ItemTemplate>
+
+    </ListView >
+
+    </StackLayout>
+
+</ContentPage>
