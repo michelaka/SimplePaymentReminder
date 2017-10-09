@@ -1,7 +1,9 @@
 ﻿using LateListRem2.Model;
 using ModernHttpClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -15,6 +17,8 @@ namespace LateListRem2
     {
         private string mURI = "https://jsonplaceholder.typicode.com/posts";
         private HttpClient mClient = new HttpClient(new NativeMessageHandler());
+        private ObservableCollection<PostItem> postItems;
+
         public MainPage()
         {
             InitializeComponent();
@@ -60,10 +64,19 @@ namespace LateListRem2
         private async void Button_Clicked(object sender, EventArgs e)
         {
             var restMessageReply = await mClient.GetAsync(mURI);
+            
             if (!restMessageReply.IsSuccessStatusCode)
                 mTextResults.Text += " RestFul API Failed! ---";
             var restContent =  await restMessageReply.Content.ReadAsStringAsync();
-            mTextResults.Text += restContent;
+            
+            var _postItems = JsonConvert.DeserializeObject<List<PostItem>>(restContent);
+            postItems = new ObservableCollection<PostItem>(_postItems);
+
+            for(int i=0;i<=12;i++)
+            {
+                mTextResults.Text += string.Format("Object [{0}] has id {1} title = {2} || body = {3} \n",i,postItems[i].Id, postItems[i].Title, postItems[i].Body.Substring(0,10));
+            }
+            
         }
     }
 }
