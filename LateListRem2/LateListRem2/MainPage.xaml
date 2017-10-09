@@ -29,6 +29,9 @@
 
     </ListView >
 
+        <Button Text="Rest API Call" Clicked="Button_Clicked"/>
+        <Label x:Name="mTextResults" />
+
     </StackLayout>
 
 </ContentPage>
