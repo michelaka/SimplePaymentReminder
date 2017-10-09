@@ -1,4 +1,5 @@
 ﻿using LateListRem2.Model;
+using ModernHttpClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace LateListRem2
 {
     public partial class MainPage : ContentPage
     {
-        private string mURI = "http://jsonplaceholder.typicode.com/posts";
-        private HttpClient mClient = new HttpClient();
+        private string mURI = "https://jsonplaceholder.typicode.com/posts";
+        private HttpClient mClient = new HttpClient(new NativeMessageHandler());
         public MainPage()
         {
             InitializeComponent();
